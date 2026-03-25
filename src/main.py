@@ -1,10 +1,13 @@
 import time
 import sys
-from net import PetriNet
-
+from net.petri_net import PetriNet
+from parser.net_parser import Parser
 
 def main(filepath):
-    net = PetriNet
+    net = PetriNet()
+    parser = Parser(filepath)
+
+    net = parser.parse()
 
 
 if __name__ == "__main__":

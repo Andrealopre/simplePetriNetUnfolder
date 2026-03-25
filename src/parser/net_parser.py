@@ -1,5 +1,4 @@
-from net import PetriNet
-
+from net.petri_net import PetriNet
 
 class Parser:
 
