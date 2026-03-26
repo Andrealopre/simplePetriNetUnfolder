@@ -12,6 +12,8 @@ def main(filepath):
     net = parser.parse()
     processor = Processor(net)
 
+    net.pasteNet()
+
 
 if __name__ == "__main__":
     if sys.argv is None:
