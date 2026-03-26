@@ -1,3 +1,13 @@
+def findPreset(net, transition):
+    preset = set()
+
+    for arc in net.arcs:
+        if arc.dst == transition:
+            preset.add(arc.src)
+
+    return preset
+
+
 def findPostset(net, transition):
     postPlaces = set()
 

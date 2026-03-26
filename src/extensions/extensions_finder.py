@@ -1,11 +1,19 @@
 from unfolder.condition import Condition
 from unfolder.event import Event
-from unfolder.processor import Processor
+import utils.utilities as util
 
-def initialExtensions(self, unf):
+
+def initialExtensions(net, unf):
     initialExtensions = set()
 
     initialMarkings = {c for c in unf if isinstance(c, Condition)}
 
-    for t in Processor.net.transitions.values():
-        presetPlaces 
+    for t in net.transitions.values():
+        presetPlaces = util.findPreset(net, t)
+
+        presetConditions = {
+                c for c in initialMarkings if c.place in presetPlaces}
+
+        if len(presetConditions) == len(presetPlaces):
+            newEvent = Event(t, presetConditions)
+
