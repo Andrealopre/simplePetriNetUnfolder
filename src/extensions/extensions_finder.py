@@ -16,4 +16,12 @@ def initialExtensions(net, unf):
 
         if len(presetConditions) == len(presetPlaces):
             newEvent = Event(t, presetConditions)
+            postsetPlaces = util.findPostset(net, t)
 
+            for p in postsetPlaces:
+                newCondition = Condition(p, newEvent)
+                newEvent.postset_conditions.add(newCondition)
+
+            initialExtensions.add(newEvent)
+
+    return initialExtensions

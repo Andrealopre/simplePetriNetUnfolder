@@ -1,8 +1,8 @@
 class Event:
 
-    _counter = 1 # event counter, used as id
-    
-    def _init__(self, transition, preset_conditions):
+    _counter = 1  # event counter, used as id
+
+    def __init__(self, transition, preset_conditions):
         self.transition = transition
         self.preset_conditions = preset_conditions
         self.postset_conditions = set()
