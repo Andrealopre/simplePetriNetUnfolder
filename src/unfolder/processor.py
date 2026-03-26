@@ -34,7 +34,4 @@ class Processor:
                 self.conditions.add(newCondition)
                 self.min.add(newCondition)
 
-        return self.min
-    
-    def getNet(self):
-        return self.net
+        return self.min 
