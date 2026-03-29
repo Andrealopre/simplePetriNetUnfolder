@@ -17,8 +17,6 @@ class Processor:
         self.cut_off = set()
 
         self.minimum = {}
-        self.configurations_cache = {}
-        self.config_length_cache = {}
 
     def unfoldingAlgorithm(self):
         unf = set(self.initialMarking)
