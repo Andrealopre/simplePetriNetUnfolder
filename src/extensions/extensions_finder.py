@@ -12,7 +12,7 @@ def initialExtensions(net, unf):
         presetPlaces = util.findPreset(net, t)
 
         presetConditions = {
-                c for c in initialMarkings if c.place in presetPlaces}
+            c for c in initialMarkings if c.place in presetPlaces}
 
         if len(presetConditions) == len(presetPlaces):
             newEvent = Event(t, presetConditions)
@@ -25,3 +25,25 @@ def initialExtensions(net, unf):
             initialExtensions.add(newEvent)
 
     return initialExtensions
+
+
+def updatePotExt(net, unf, event):
+    extensions = set()
+
+    u = event.transition
+
+    postPlaces = util.findPostset(net, u)
+    successiveTransitions = util.findSuccTransitions(net, postPlaces)
+    presetPlaces = util.findPreset(net, u)
+
+    difference = presetPlaces - postPlaces
+    postDifference = util.findDifference(net, difference)
+
+    transitions = successiveTransitions - postDifference
+
+    for t in transitions:
+        preset = util.findPreset(net, t)
+        C = {c for c in unf
+             if isinstance(c, Condition)
+             and c.place in preset
+             and }
