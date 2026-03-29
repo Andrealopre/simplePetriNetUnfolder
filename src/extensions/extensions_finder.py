@@ -1,5 +1,6 @@
 from unfolder.condition import Condition
 from unfolder.event import Event
+import relationships.relations
 import utils.utilities as util
 
 
@@ -43,7 +44,24 @@ def updatePotExt(net, unf, event):
 
     for t in transitions:
         preset = util.findPreset(net, t)
-        C = {c for c in unf
-             if isinstance(c, Condition)
-             and c.place in preset
-             and }
+        C = {
+            c
+            for c in unf
+            if isinstance(c, Condition)
+            and c.place in preset
+            and relationships.relations.isConcurrent(c, event)
+        }
+
+        extensions |= cover(C, t, dict(), net)
+
+    return extensions
+
+
+def cover(C, t, preset, net):
+    preset_t = util.findPreset(net, t)
+    extensions = set()
+
+    if len(preset_t) == len(preset):
+        inputConditions = {preset[p] for p in preset_t}
+
+        conditionsList = list(inputConditions)
