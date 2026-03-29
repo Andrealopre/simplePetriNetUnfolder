@@ -1,5 +1,3 @@
-from unfolder.processor import Processor
-
 configurations_cache = {}
 configLengthCache = {}
 

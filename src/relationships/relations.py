@@ -1,5 +1,6 @@
 from unfolder.processor import Processor
 from unfolder.condition import Condition
+import configurations.config
 
 
 def causalUpdaterPre(condition, event):
@@ -91,7 +92,19 @@ def isConcurrent(x, y):
         if x_event is None:
             if x in y_event.preset_conditions:
                 return False
-            # i need configurations here, so on hold until i make them
+            config_y = configurations.config.localConfiguration(y_event)
+            for ancestorEvent in config_y:
+                if x in ancestorEvent.preset_conditions:
+                    return False
+            return True
+        else:
+            if y in x_event.preset_conditions:
+                return False
+            config_x = configurations.config.localConfiguration(x_event)
+            for ancestorEvent in config_x:
+                if y in ancestorEvent.present_conditions:
+                    return False
+            return True
 
     if isCausal(x_event, y_event) or isCausal(y_event, x_event):
         return False
